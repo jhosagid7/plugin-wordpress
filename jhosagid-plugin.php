@@ -30,4 +30,16 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 copyright 2005—2015 Automattic, Inc.
 
-*4
+*/
+
+if ( ! define( 'ABSPATH' ) ) {
+    die;
+}
+
+define( 'ABSPATH' ) or die( 'Hey, you can/t access this file, yuo silly human!');
+
+if ( ! function_exists( 'add_action' ) ) {
+    echo 'Hey, you can/t access this file, you silly human!';
+    exit;
+} 
+
