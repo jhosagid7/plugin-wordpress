@@ -32,14 +32,33 @@ copyright 2005—2015 Automattic, Inc.
 
 */
 
-if ( ! define( 'ABSPATH' ) ) {
-    die;
-}
+defined( 'ABSPATH' ) or die( 'Hey, you can/t access this file, yuo silly human!');
 
-define( 'ABSPATH' ) or die( 'Hey, you can/t access this file, yuo silly human!');
-
-if ( ! function_exists( 'add_action' ) ) {
-    echo 'Hey, you can/t access this file, you silly human!';
-    exit;
+class JhosagidPlugin
+{
+    //methods
+    function activate() {
+        // generate a CPT
+        // flush rewrite rules
+    }
+    function deactivate() {
+        // flush rewrite rules
+    }
+    function uninstall() {
+        // delate CPT
+        // delete all the plugin data from the DB
+    }
 } 
 
+if ( class_exists( 'JhosagidPlugin' ) ) {
+    //instance
+    $jhosagidPlugin = new JhosagidPlugin();
+}
+
+// activate
+register_activation_hook( __FILE__, array( $jhosagidPlugin, 'activate') );
+ 
+// deactivate
+register_deactivation_hook( __FILE__, array( $jhosagidPlugin, 'deactivate') );
+
+// uninstall
