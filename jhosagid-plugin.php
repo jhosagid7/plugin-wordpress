@@ -74,3 +74,4 @@ register_activation_hook( __FILE__, array( $jhosagidPlugin, 'activate') );
 register_deactivation_hook( __FILE__, array( $jhosagidPlugin, 'deactivate') );
 
 // uninstall
+register_uninstall_hook( __FILE__, array( $jhosagidPlugin, 'uninstall') );
