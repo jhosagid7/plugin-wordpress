@@ -58,7 +58,7 @@ class JhosagidPlugin
 
     function enqueue(){
         // enqueue all our scripts
-        wp_enqueue_style( $handle:string, $src:string, $deps:array, $ver:string|boolean|null, $media:string );
+        wp_enqueue_style( $handle, $src, $deps, $ver, $media );
     }
     
 } 
