@@ -39,26 +39,27 @@ class JhosagidPlugin
     function __construct(){
         add_action( 'init', array($this, 'custom_post_type') );
     }
-    //methods
+    
     function activate() {
         // generate a CPT
         $this->custom_post_type();
         // flush rewrite rules
         flush_rewrite_rules(); 
     }
+
     function deactivate() {
         // flush rewrite rules
         flush_rewrite_rules();
-    }
-    function uninstall() {
-        // delate CPT
-        // delete all the plugin data from the DB
     }
 
     function custom_post_type(){
         register_post_type( 'book', ['public' => true, 'label' => 'Books'] );
     }
 
+    function enqueue(){
+        // enqueue all our scripts
+        wp_enqueue_style( $handle:string, $src:string, $deps:array, $ver:string|boolean|null, $media:string );
+    }
     
 } 
 
