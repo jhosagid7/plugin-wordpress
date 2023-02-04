@@ -3,9 +3,11 @@
  * @package JhosagidPlugin
  */
 
-class JhosagidPluginActivate
+namespace Inc;
+
+class Deactivate
 {
-    public static function activate() {
+    public static function deactivate() {
         flush_rewrite_rules();
     }
 }
