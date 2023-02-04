@@ -36,21 +36,29 @@ defined( 'ABSPATH' ) or die( 'Hey, you can/t access this file, yuo silly human!'
 
 class JhosagidPlugin
 {
+    // Public
+
+    // Protected
+    // can be accessed only within the class itself or extensions of that class
+
+    // Private
+    // can be accesssed only within the class itself
+
+    // Static
+
     function __construct(){
-        add_action( 'init', array($this, 'custom_post_type') );
+        // $this->create_post_type();
+        $this->print_stuff();
+        $this->print_stuff_private();
     }
 
     function register() {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
     }
-    
-    // function register_admin_scirpts() {
-    //     add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-    // }
 
-    // function register_scirpts() {
-    //     add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) );
-    // }
+    protected function create_post_type() {
+        add_action( 'init', array($this, 'custom_post_type') );
+    }
     
     function activate() {
         // generate a CPT
@@ -68,6 +76,14 @@ class JhosagidPlugin
         register_post_type( 'book', ['public' => true, 'label' => 'Books'] );
     }
 
+    function print_stuff() {
+        var_dump(['test']);
+    }
+
+    private function print_stuff_private() {
+        echo 'Test';
+    }
+
     function enqueue(){
         // enqueue all our scripts
         wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/mystyle.css', __FILE__ ) );
@@ -75,6 +91,16 @@ class JhosagidPlugin
     } 
     
 } 
+
+class SecondClass extends JhosagidPlugin
+{
+    function register_post_type() {
+        $this->create_post_type();
+    }
+}
+
+$secondClass = new SecondClass();
+$secondClass->register_post_type();
 
 if ( class_exists( 'JhosagidPlugin' ) ) {
     //instance
