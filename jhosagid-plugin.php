@@ -38,8 +38,34 @@ if ( ! class_exists( 'JhosagidPlugin' ) ) {
 
     class JhosagidPlugin
     {
+        public $plugin;
+
+        function __construct() {
+            $this->plugin = plugin_basename( __FILE__ );
+        }
+
         function register() {
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+
+            add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
+
+            add_filter( "plugin_action_links_$this->plugin", array( $this, 'settings_link' ) );
+        }
+
+        public function settings_link( $links ) {
+            $setting_link = '<a href="admin.php?page=jhosagid_plugin">Settings</a>';
+            array_push( $links, $setting_link );
+
+            return $links;
+        }
+
+        public function add_admin_pages(){
+            add_menu_page( 'Jhosagid Plugin', 'Jhosagid', 'manage_options', 'jhosagid_plugin', array( $this, 'admin_index' ), 'dashicons-superhero', 110 );
+        }
+
+        public function admin_index() {
+            // requiere template
+            require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
         }
 
         protected function create_post_type() {
