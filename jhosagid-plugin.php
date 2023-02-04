@@ -34,6 +34,14 @@ copyright 2005—2015 Automattic, Inc.
 
 defined( 'ABSPATH' ) or die( 'Hey, you can/t access this file, yuo silly human!');
 
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
 if ( ! class_exists( 'JhosagidPlugin' ) ) {
 
     class JhosagidPlugin
@@ -83,8 +91,11 @@ if ( ! class_exists( 'JhosagidPlugin' ) ) {
         } 
 
         function activate() {
-            require_once plugin_dir_path( __FILE__ ) . 'include/jhosagid-plugin-activate.php';
-            JhosagidPluginActivate::activate();
+            Activate::activate();
+        }
+        
+        function deactivate() {
+            Deactivate::deactivate();
         }
     } 
 
@@ -96,8 +107,7 @@ if ( ! class_exists( 'JhosagidPlugin' ) ) {
     register_activation_hook( __FILE__, array( $jhosagidPlugin, 'activate' ) );
     
     // deactivate
-    require_once plugin_dir_path( __FILE__ ) . 'include/jhosagid-plugin-deactivate.php';
-    register_deactivation_hook( __FILE__, array( 'JhosagidPluginDeactivate', 'deactivate' ) );
+    register_deactivation_hook( __FILE__, array( 'Deactivate', 'deactivate' ) );
 
 }
 

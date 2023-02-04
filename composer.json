@@ -1,0 +1,19 @@
+{
+    "name": "jhosagid/jhosagid-plugin",
+    "description": "Base starter plugin",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./includes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jhonny Pirela",
+            "email": "jhosagid7@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
