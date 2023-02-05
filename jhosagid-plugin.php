@@ -28,21 +28,39 @@ GNU General Public License fbr more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-copyright 2005—2015 Automattic, Inc.
 
+copyright 2005—2015 Automattic, Inc.
 */
 
+// Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
+// Require once the Composer Autoload
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
     require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+/**
+ * The code that runs during plugin activation
+ */
+function activate_jhosagid_plugin() {
+    Inc\Base\Activate::activate();
+}
+register_activation_hook( __FILE__, 'activate_jhosagid_plugin' );
 
+/**
+ * The code that runs during plugin deactivation
+ */
+function deactivate_jhosagid_plugin() {
+    Inc\Base\Deactivate::deactivate();
+}
+register_deactivation_hook( __FILE__, 'deactivate_jhosagid_plugin' );
+
+/**
+ * Initialize all the core classes of the plugin
+ */
 if ( class_exists( 'Inc\\Init' ) ) {
     Inc\Init::register_services();
 }
