@@ -3,7 +3,7 @@
  * @package JhosagidPlugin
  */
 
-namespace Inc;
+namespace Inc\Base;
 
 class Deactivate
 {
